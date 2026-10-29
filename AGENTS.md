@@ -1,12 +1,27 @@
 # AGENTS.md
 
 ## Proyecto
-Landing page de "Cadencia" — un único `index.html` autocontenido (Tailwind vía CDN,
-sin JS propio, validación nativa de formularios). Ver `README.md`.
+Landing page de "Cadencia". Proyecto **Vite + React + TypeScript** con Tailwind 4.
+Ver `README.md` para el stack y la estructura.
 
 ## Entorno
-- Servidor de vista previa: `python3 -m http.server 12000` desde la raíz del proyecto.
+- Node v24, npm 11. Instalar con `npm install`.
+- `npm run build` ejecuta `tsc --noEmit` antes de `vite build`: si el typecheck
+  falla, no hay bundle.
+- `npm run dev` en el puerto 12001 (host `work-2-...all-hands.dev`).
 - Python: `/usr/local/bin/python`.
+
+### Trampas de Vite en este entorno
+- `preview`/`server` necesitan `allowedHosts: ['.prod-runtime.all-hands.dev']`,
+  o Vite responde *"Blocked request. This host is not allowed."*
+- El `index.html` es la entrada de Vite, no la página final: el HTML real se
+  genera en `dist/`. No editarlo esperando cambios visuales.
+
+### Verificación visual
+La automatización del navegador no siempre dispara los eventos de React en
+campos controlados. Para probar el formulario de verdad, usar Puppeteer con
+`/usr/lib/chromium/chromium` (ver historial de la sesión) en lugar de fiarse
+de `browser_type`.
 
 ## Git / GitHub — acceso
 El `GITHUB_TOKEN` de este entorno **tiene permiso de escritura** sobre
