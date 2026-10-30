@@ -1,37 +1,117 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-paper: #faf8f4;
-  --color-ink: #16130f;
-  --color-muted: #6b6459;
-  --color-lime: #d6f84c;
-  --color-line: #e6e1d8;
+  /* Fondos limpios */
+  --color-cream: #fdfbf9;
+  --color-surface: #ffffff;
 
-  --font-display: 'Instrument Serif', Georgia, serif;
+  /* Rosas cálidos */
+  --color-rose-50: #fff1f5;
+  --color-rose-100: #ffe0ea;
+  --color-rose-300: #f7a8c4;
+  --color-rose-500: #ec5c93;
+  --color-rose-600: #db3f7c;
+
+  /* Lilas */
+  --color-lilac-50: #f7f4ff;
+  --color-lilac-100: #ede7fe;
+  --color-lilac-300: #c3aef8;
+  --color-lilac-500: #9a6ef0;
+
+  /* Morados vibrantes */
+  --color-violet-500: #7c4dff;
+  --color-violet-600: #6d3bd6;
+  --color-violet-700: #57299f;
+
+  /* Texto */
+  --color-ink: #1c1530;
+  --color-ink-soft: #4a4160;
+  --color-muted: #7a7291;
+  --color-line: #ece7f5;
+
+  --font-display: 'Outfit', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Radios amplios */
+  --radius-card: 1.75rem;
+  --radius-pill: 999px;
+
+  /* Sombras difuminadas sutiles */
+  --shadow-soft: 0 4px 24px -8px rgb(87 41 159 / 0.12);
+  --shadow-lift: 0 18px 40px -16px rgb(87 41 159 / 0.22);
 }
 
 html {
   scroll-behavior: smooth;
+  /* Red de seguridad contra cualquier desbordamiento horizontal residual. */
+  overflow-x: clip;
 }
 
-@keyframes reveal {
+body {
+  background-color: var(--color-cream);
+}
+
+/* Degradado morado para titulares destacados */
+.text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-violet-600) 0%,
+    var(--color-violet-500) 35%,
+    var(--color-rose-500) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Carrusel 3D: posiciones en perspectiva */
+.stage {
+  perspective: 1400px;
+  /* Recorta las tarjetas laterales sin aplanar el 3D: el clip va aquí y no en
+     .deck, porque un overflow distinto de visible anularía su preserve-3d. */
+  overflow: hidden;
+}
+
+.deck {
+  transform-style: preserve-3d;
+}
+
+.card-3d {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.4s ease,
+    filter 0.4s ease;
+  backface-visibility: hidden;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
   to {
     opacity: 1;
     transform: none;
   }
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  animation: reveal 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+.rise {
+  animation: rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
-.grain {
-  background-image: radial-gradient(var(--color-ink) 0.5px, transparent 0.5px);
-  background-size: 22px 22px;
-  opacity: 0.05;
+/* Carrusel automatico: barra de progreso de la tarjeta activa */
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.progress-fill {
+  transform-origin: left;
+  animation: fill linear forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -39,9 +119,12 @@ html {
     scroll-behavior: auto;
   }
 
-  .reveal {
+  .rise,
+  .progress-fill {
     animation: none;
-    opacity: 1;
-    transform: none;
+  }
+
+  .card-3d {
+    transition: none;
   }
 }

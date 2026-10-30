@@ -1,21 +1,27 @@
-import { CallToAction } from './components/CallToAction.tsx';
-import { Contact } from './components/Contact.tsx';
-import { Features } from './components/Features.tsx';
+import { Carousel3D } from './components/Carousel3D.tsx';
+import { Catalog } from './components/Catalog.tsx';
+import { Community, Donate } from './components/Community.tsx';
 import { Footer } from './components/Footer.tsx';
-import { Header } from './components/Header.tsx';
 import { Hero } from './components/Hero.tsx';
-import { Method } from './components/Method.tsx';
+import { Navbar } from './components/Navbar.tsx';
 
 export default function App() {
   return (
-    <div className="bg-paper font-sans text-ink antialiased selection:bg-lime selection:text-ink">
-      <Header />
+    <div className="min-h-screen bg-cream font-sans text-ink antialiased">
+      <a
+        href="#carrusel"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-pill focus:bg-violet-600 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+      >
+        Saltar al contenido
+      </a>
+
+      <Navbar />
       <main>
         <Hero />
-        <Features />
-        <Method />
-        <CallToAction />
-        <Contact />
+        <Carousel3D />
+        <Catalog />
+        <Community />
+        <Donate />
       </main>
       <Footer />
     </div>

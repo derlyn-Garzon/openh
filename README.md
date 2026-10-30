@@ -1,7 +1,8 @@
-# Cadencia — landing page
+# Cyber Bionikas — Espacio Colectivo & Vivo
 
-Landing de producto para **Cadencia**, una app de planificación del trabajo por
-ciclos semanales. En español, minimalista, sin dependencias de UI externas.
+Interfaz web para una plataforma de formación, pensamiento crítico y
+colectividad. Estética de carrusel/historias, esquinas redondeadas y paleta
+cálida de rosas, lilas y morados.
 
 ## Stack
 
@@ -22,42 +23,72 @@ npm run preview    # servir el build de producción
 npm run typecheck  # solo comprobación de tipos
 ```
 
+## Identidad visual
+
+Los tokens viven en `src/index.css`, dentro del bloque `@theme` de Tailwind 4.
+Cambiar ahí la paleta re-tiñe toda la interfaz, sin tocar componentes.
+
+| Token | Uso |
+|---|---|
+| `--color-cream` | Fondo general, limpio |
+| `--color-surface` | Tarjetas y superficies |
+| `--color-rose-500/600` | Acento cálido |
+| `--color-lilac-*` | Superficies suaves y estados hover |
+| `--color-violet-500/600/700` | Primario y titulares |
+| `--color-ink` | Texto principal |
+| `--radius-card` | Radio amplio de tarjetas (1.75rem) |
+| `--radius-pill` | Botones y etiquetas |
+| `--shadow-soft` / `--shadow-lift` | Profundidad difuminada |
+
+La clase `.text-gradient` aplica el degradado morado a titulares destacados.
+
 ## Estructura
 
 ```
-index.html              entrada de Vite (monta #root)
 src/
-  main.tsx              arranque de React
-  App.tsx               composición de las secciones
-  index.css             tema de Tailwind 4 (@theme) y estilos globales
-  data/content.ts       textos y listas, tipados
+  App.tsx                     composición de secciones
+  index.css                   tokens de diseño, 3D y animaciones
+  data/content.ts             módulos, filtros y navegación, tipados
   components/
-    Header.tsx          navegación fija
-    Hero.tsx            titular y llamadas a la acción
-    Features.tsx        tres propuestas de producto
-    Method.tsx          el ciclo semanal en cuatro pasos
-    CallToAction.tsx    banda de cierre
-    Contact.tsx         formulario de contacto (estado controlado)
-    Footer.tsx          pie de página
-    Section.tsx         primitivas de etiqueta y titular
-public/favicon.svg      icono
+    ui.tsx                    Button, ButtonLink, Pill, CategoryTag
+    ModuleCard.tsx            ModuleCard + ModuleArt (portada ilustrada)
+    Navbar.tsx                barra fija con menú móvil
+    Hero.tsx                  píldora, titular con degradado y CTAs
+    Carousel3D.tsx            carrusel en perspectiva con autoplay
+    Catalog.tsx               buscador + filtros en píldora + cuadrícula
+    Community.tsx             Community y Donate
+    Footer.tsx                pie con columnas
+public/favicon.svg            icono
 ```
 
-Los textos viven en `src/data/content.ts`, no incrustados en el marcado, para
-poder editarlos sin tocar los componentes.
+## Componentes clave
 
-## Formulario de contacto
+**`Carousel3D`** — las tarjetas se colocan con `translateX`, `translateZ`,
+`rotateY` y `scale` según su distancia a la activa. La distancia es **circular**,
+así que la última queda junto a la primera y el recorrido no tiene saltos.
+Incluye autoplay (6 s), pausa, flechas, puntos de progreso y navegación con
+las flechas del teclado.
 
-Es un formulario controlado con estado en React. Valida en el cliente que el
-consentimiento esté marcado; los campos `nombre`, `email` y `mensaje` usan
-validación nativa del navegador (`required`, `type="email"`).
+**`Catalog`** — filtra por categoría y busca en título, descripción, etiqueta y
+autoría a la vez. Si no hay resultados muestra un estado vacío con botón para
+restablecer.
 
-**Pendiente:** no hay endpoint conectado. `handleSubmit` en
-`src/components/Contact.tsx` solo muestra el mensaje de éxito en pantalla.
-Sustituir por la llamada real cuando exista la URL del servicio.
+**`ModuleArt`** — la portada es un degradado con glifo, no una imagen externa.
+Evita peticiones de red y funciona sin conexión.
+
+## Notas de implementación
+
+- **El recorte del carrusel va en `.stage`, no en `.deck`.** Un `overflow`
+  distinto de `visible` sobre `.deck` anularía su `transform-style: preserve-3d`
+  y aplanaría el efecto.
+- `html { overflow-x: clip }` es una red de seguridad contra desbordamiento
+  horizontal residual.
+- Las animaciones se desactivan con `prefers-reduced-motion`.
 
 ## Accesibilidad
 
-- Cada campo tiene su `<label>` asociado por `id`.
-- El resultado del envío se anuncia con `role="status"`.
-- `prefers-reduced-motion` desactiva animaciones y desplazamiento suave.
+- Enlace "Saltar al contenido" al principio del documento.
+- El carrusel expone `aria-roledescription="carrusel"`, es enfocable y responde
+  al teclado; el módulo activo se anuncia con `aria-live`.
+- Los filtros usan `aria-pressed`; los puntos, `aria-current`.
+- El contador de resultados del catálogo es `aria-live="polite"`.
