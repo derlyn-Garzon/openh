@@ -50,7 +50,7 @@ export function Catalog() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Buscar módulos..."
-              className="w-full rounded-pill border border-line bg-surface py-3.5 pr-5 pl-12 text-sm text-ink shadow-soft outline-none transition-colors duration-200 placeholder:text-muted focus:border-lilac-300"
+              className="w-full rounded-pill border border-line bg-surface py-3.5 pr-5 pl-12 text-sm text-ink shadow-soft outline-none transition-colors duration-200 placeholder:text-muted focus:border-grape-300"
             />
           </div>
 
@@ -63,8 +63,8 @@ export function Catalog() {
                   aria-pressed={filter === option}
                   className={`rounded-pill border px-4 py-1.5 text-xs font-medium transition-all duration-200 ${
                     filter === option
-                      ? 'border-violet-600 bg-violet-600 text-white shadow-soft'
-                      : 'border-line bg-surface text-ink-soft hover:border-lilac-300 hover:bg-lilac-50'
+                      ? 'border-grape-600 bg-grape-600 text-white shadow-soft'
+                      : 'border-line bg-surface text-ink-soft hover:border-grape-300 hover:bg-grape-50'
                   }`}
                 >
                   {option}
@@ -87,7 +87,7 @@ export function Catalog() {
             ))}
           </ul>
         ) : (
-          <div className="mt-6 rounded-card border border-dashed border-lilac-300 bg-lilac-50/60 px-6 py-14 text-center">
+          <div className="mt-6 rounded-card border border-dashed border-grape-300 bg-grape-50/60 px-6 py-14 text-center">
             <p className="font-display text-lg font-semibold text-ink">
               Todavía no hay módulos para esa búsqueda
             </p>
@@ -100,7 +100,7 @@ export function Catalog() {
                 setQuery('');
                 setFilter('Todos');
               }}
-              className="mt-5 rounded-pill bg-violet-600 px-5 py-2.5 text-xs font-semibold text-white transition-all duration-200 hover:bg-violet-700"
+              className="mt-5 rounded-pill bg-grape-600 px-5 py-2.5 text-xs font-semibold text-white transition-all duration-200 hover:bg-grape-600"
             >
               Ver todos los módulos
             </button>

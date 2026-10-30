@@ -3,13 +3,13 @@ import type { ButtonHTMLAttributes, AnchorHTMLAttributes, ReactNode } from 'reac
 type Variant = 'primary' | 'soft' | 'ghost';
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-pill font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600';
+  'inline-flex items-center justify-center gap-2 rounded-pill font-medium transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape-600';
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-gradient-to-r from-violet-600 to-rose-500 text-white shadow-soft hover:shadow-lift hover:-translate-y-0.5',
-  soft: 'bg-lilac-100 text-violet-700 hover:bg-lilac-300/60 hover:-translate-y-0.5',
-  ghost: 'border border-line bg-surface text-ink hover:border-lilac-300 hover:bg-lilac-50',
+    'bg-gradient-to-r from-grape-600 to-bubble-500 text-white shadow-soft hover:shadow-lift hover:-translate-y-0.5',
+  soft: 'bg-grape-100 text-grape-600 hover:bg-grape-300/60 hover:-translate-y-0.5',
+  ghost: 'border border-line bg-surface text-ink hover:border-grape-300 hover:bg-grape-50',
 };
 
 const sizes = {
@@ -58,8 +58,8 @@ interface PillProps {
 
 export function Pill({ children, active = false, className = '' }: PillProps) {
   const tone = active
-    ? 'bg-violet-600 text-white border-violet-600 shadow-soft'
-    : 'bg-surface text-ink-soft border-line hover:border-lilac-300 hover:bg-lilac-50';
+    ? 'bg-grape-600 text-white border-grape-600 shadow-soft'
+    : 'bg-surface text-ink-soft border-line hover:border-grape-300 hover:bg-grape-50';
   return (
     <span
       className={`inline-flex items-center rounded-pill border px-4 py-1.5 text-xs font-medium tracking-wide transition-all duration-200 ${tone} ${className}`}
@@ -75,7 +75,7 @@ interface CategoryTagProps {
 
 export function CategoryTag({ children }: CategoryTagProps) {
   return (
-    <span className="inline-flex items-center rounded-pill bg-rose-50 px-3 py-1 text-[0.7rem] font-semibold tracking-wide text-rose-600">
+    <span className="inline-flex items-center rounded-pill bg-bubble-50 px-3 py-1 text-[0.7rem] font-semibold tracking-wide text-bubble-600">
       {children}
     </span>
   );

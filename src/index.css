@@ -1,49 +1,68 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Fondos limpios */
-  --color-cream: #fdfbf9;
+  /* Fondos limpios y luminosos */
+  --color-cream: #fffdf7;
   --color-surface: #ffffff;
 
-  /* Rosas cálidos */
-  --color-rose-50: #fff1f5;
-  --color-rose-100: #ffe0ea;
-  --color-rose-300: #f7a8c4;
-  --color-rose-500: #ec5c93;
-  --color-rose-600: #db3f7c;
+  /* Rosa chicle — acento cálido principal */
+  --color-bubble-50: #fff1f7;
+  --color-bubble-100: #ffe3ef;
+  --color-bubble-300: #ff9dc7;
+  --color-bubble-500: #ff5fa8;
+  --color-bubble-600: #f0348b;
 
-  /* Lilas */
-  --color-lilac-50: #f7f4ff;
-  --color-lilac-100: #ede7fe;
-  --color-lilac-300: #c3aef8;
-  --color-lilac-500: #9a6ef0;
+  /* Coral — segundo acento cálido */
+  --color-coral-50: #fff2ee;
+  --color-coral-100: #ffe1d8;
+  --color-coral-300: #ffab8f;
+  --color-coral-500: #ff7a55;
+  --color-coral-600: #f25c33;
 
-  /* Morados vibrantes */
-  --color-violet-500: #7c4dff;
-  --color-violet-600: #6d3bd6;
-  --color-violet-700: #57299f;
+  /* Amarillo sol — energía de feria */
+  --color-sun-50: #fffbeb;
+  --color-sun-100: #fff3c4;
+  --color-sun-300: #ffd75e;
+  --color-sun-500: #ffb703;
+  --color-sun-600: #e08e00;
+
+  /* Menta — frescura */
+  --color-mint-50: #ecfdf5;
+  --color-mint-100: #d3f8e6;
+  --color-mint-300: #6ee7b7;
+  --color-mint-500: #10b981;
+
+  /* Cielo — equilibrio frío */
+  --color-sky-50: #eff8ff;
+  --color-sky-100: #dcefff;
+  --color-sky-300: #7cc4fb;
+  --color-sky-500: #2f9fe8;
+
+  /* Uva — profundidad morada */
+  --color-grape-50: #f8f4ff;
+  --color-grape-100: #eee6ff;
+  --color-grape-300: #c3aef8;
+  --color-grape-500: #9a6ef0;
+  --color-grape-600: #7c4dff;
 
   /* Texto */
-  --color-ink: #1c1530;
-  --color-ink-soft: #4a4160;
-  --color-muted: #7a7291;
-  --color-line: #ece7f5;
+  --color-ink: #241436;
+  --color-ink-soft: #52406b;
+  --color-muted: #7e7194;
+  --color-line: #f0e9f7;
 
   --font-display: 'Outfit', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 
-  /* Radios amplios */
   --radius-card: 1.75rem;
   --radius-pill: 999px;
 
-  /* Sombras difuminadas sutiles */
-  --shadow-soft: 0 4px 24px -8px rgb(87 41 159 / 0.12);
-  --shadow-lift: 0 18px 40px -16px rgb(87 41 159 / 0.22);
+  --shadow-soft: 0 4px 24px -8px rgb(124 77 255 / 0.14);
+  --shadow-lift: 0 20px 44px -16px rgb(124 77 255 / 0.26);
 }
 
 html {
   scroll-behavior: smooth;
-  /* Red de seguridad contra cualquier desbordamiento horizontal residual. */
   overflow-x: clip;
 }
 
@@ -51,43 +70,111 @@ body {
   background-color: var(--color-cream);
 }
 
-/* Degradado morado para titulares destacados */
+/* Titulares con degradado festivo */
 .text-gradient {
   background-image: linear-gradient(
     100deg,
-    var(--color-violet-600) 0%,
-    var(--color-violet-500) 35%,
-    var(--color-rose-500) 100%
+    var(--color-grape-600) 0%,
+    var(--color-bubble-500) 45%,
+    var(--color-coral-500) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Carrusel 3D: posiciones en perspectiva */
-.stage {
-  perspective: 1400px;
-  /* Recorta las tarjetas laterales sin aplanar el 3D: el clip va aquí y no en
-     .deck, porque un overflow distinto de visible anularía su preserve-3d. */
-  overflow: hidden;
+/* ---------- Guirnalda de banderines ---------- */
+.bunting {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--color-bubble-500) 0 14px,
+    var(--color-sun-300) 14px 28px,
+    var(--color-mint-500) 28px 42px,
+    var(--color-sky-500) 42px 56px,
+    var(--color-grape-600) 56px 70px
+  );
 }
 
-.deck {
-  transform-style: preserve-3d;
+/* ---------- Toldo a rayas de caseta ---------- */
+.awning {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-bubble-500) 0 22px,
+    var(--color-surface) 22px 44px
+  );
 }
 
-.card-3d {
-  transition:
-    transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
-    opacity 0.4s ease,
-    filter 0.4s ease;
-  backface-visibility: hidden;
+/* ---------- Bombillas de marquesina ---------- */
+.bulb {
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / 0.7),
+    0 0 12px 2px currentColor;
 }
 
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.bulb-blink {
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+/* ---------- Carrusel de diapositivas ---------- */
+.slide-track {
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-block: 0.5rem 1.5rem;
+  /* El relleno lateral es (100% - ancho de diapositiva) / 2, de modo que la
+     primera y la última diapositiva también alcanzan el centro. Sin esto, la
+     diapositiva 0 nunca se centra y el indicador se desincroniza. */
+  padding-inline: 9%;
+}
+
+.slide-track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide-item {
+  scroll-snap-align: center;
+  /* El 100% se resuelve contra el área de contenido, ya descontado el relleno;
+     el ancho visible resultante es el 82% del contenedor. */
+  flex: 0 0 100%;
+}
+
+@media (min-width: 640px) {
+  .slide-track {
+    padding-inline: 21%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slide-track {
+    padding-inline: 28%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .slide-track {
+    padding-inline: 32%;
+  }
+}
+
+/* ---------- Animaciones de entrada ---------- */
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -99,7 +186,69 @@ body {
   animation: rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
-/* Carrusel automatico: barra de progreso de la tarjeta activa */
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.pop {
+  animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ---------- Confeti ---------- */
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12vh, 0) rotate(0deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 0px), 108vh, 0) rotate(720deg);
+  }
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+  animation: fall linear infinite;
+}
+
+/* ---------- Noria ---------- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.wheel-spin {
+  transform-origin: center;
+  animation: spin 34s linear infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.bob {
+  animation: bob 4.5s ease-in-out infinite;
+}
+
 @keyframes fill {
   from {
     transform: scaleX(0);
@@ -119,12 +268,17 @@ body {
     scroll-behavior: auto;
   }
 
-  .rise,
-  .progress-fill {
-    animation: none;
+  .slide-track {
+    scroll-behavior: auto;
   }
 
-  .card-3d {
-    transition: none;
+  .rise,
+  .pop,
+  .confetti-piece,
+  .wheel-spin,
+  .bob,
+  .bulb-blink,
+  .progress-fill {
+    animation: none;
   }
 }

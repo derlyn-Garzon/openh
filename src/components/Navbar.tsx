@@ -7,7 +7,7 @@ export function Logo({ className = '' }: { className?: string }) {
     <a href="#inicio" className={`flex items-center gap-2.5 ${className}`}>
       <span
         aria-hidden="true"
-        className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-violet-600 to-rose-500 font-display text-sm font-bold text-white"
+        className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-grape-600 to-bubble-500 font-display text-sm font-bold text-white"
       >
         CB
       </span>
@@ -36,7 +36,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="transition-colors duration-200 hover:text-violet-600"
+                className="transition-colors duration-200 hover:text-grape-600"
               >
                 {link.label}
               </a>
@@ -58,7 +58,7 @@ export function Navbar() {
             aria-expanded={open}
             aria-controls="menu-movil"
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-            className="grid h-9 w-9 place-items-center rounded-2xl border border-line bg-surface text-ink transition-colors duration-200 hover:bg-lilac-50 lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-2xl border border-line bg-surface text-ink transition-colors duration-200 hover:bg-grape-50 lg:hidden"
           >
             <span aria-hidden="true" className="text-sm">
               {open ? '✕' : '☰'}
@@ -75,7 +75,7 @@ export function Navbar() {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-2xl px-4 py-2.5 text-sm text-ink-soft transition-colors duration-200 hover:bg-lilac-50 hover:text-violet-600"
+                  className="block rounded-2xl px-4 py-2.5 text-sm text-ink-soft transition-colors duration-200 hover:bg-grape-50 hover:text-grape-600"
                 >
                   {link.label}
                 </a>

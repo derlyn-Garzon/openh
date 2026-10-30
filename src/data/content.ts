@@ -9,9 +9,11 @@ export interface Module {
   author: string;
   date: string;
   duration: string;
-  /** Tinte de la ilustración; se usa para generar el degradado de portada. */
+  /** Tinte de la portada: degradado de dos colores. */
   art: readonly [string, string];
   glyph: string;
+  /** Atracción de feria asociada, refuerza el tono lúdico. */
+  ride: string;
 }
 
 export const modules: readonly Module[] = [
@@ -21,12 +23,13 @@ export const modules: readonly Module[] = [
     tag: 'Literatura y Poesía Feminista',
     title: 'La palabra como territorio propio',
     description:
-      'Un recorrido por voces que escribieron el cuerpo y la memoria antes de pedir permiso.',
+      'Un paseo alegre por voces que escribieron el cuerpo y la memoria antes de pedir permiso.',
     author: 'Colectivo Bionikas',
     date: '12 mar 2026',
     duration: '18 min',
-    art: ['#9a6ef0', '#ec5c93'],
+    art: ['#ff5fa8', '#ffb703'],
     glyph: '✶',
+    ride: 'Carrusel de letras',
   },
   {
     id: 'apoyo-mutuo',
@@ -38,8 +41,9 @@ export const modules: readonly Module[] = [
     author: 'Mesa de Cuidados',
     date: '04 mar 2026',
     duration: '24 min',
-    art: ['#ec5c93', '#f7a8c4'],
+    art: ['#10b981', '#7cc4fb'],
     glyph: '❋',
+    ride: 'Rueda del cuidado',
   },
   {
     id: 'decolonial',
@@ -47,12 +51,13 @@ export const modules: readonly Module[] = [
     tag: 'Perspectiva Decolonial',
     title: 'Desaprender para poder mirar',
     description:
-      'Las categorías que heredamos y por qué nombrarlas es el primer acto político.',
+      'Las categorías que heredamos y por qué nombrarlas es el primer acto de libertad.',
     author: 'Núcleo Sur',
     date: '27 feb 2026',
     duration: '31 min',
-    art: ['#7c4dff', '#6d3bd6'],
+    art: ['#7c4dff', '#2f9fe8'],
     glyph: '◈',
+    ride: 'Túnel de espejos',
   },
   {
     id: 'ecologia',
@@ -64,8 +69,9 @@ export const modules: readonly Module[] = [
     author: 'Asamblea Verde',
     date: '19 feb 2026',
     duration: '22 min',
-    art: ['#6d3bd6', '#9a6ef0'],
+    art: ['#2f9fe8', '#6ee7b7'],
     glyph: '❀',
+    ride: 'Río vivo',
   },
   {
     id: 'pedagogia',
@@ -73,12 +79,13 @@ export const modules: readonly Module[] = [
     tag: 'Pedagogías Críticas',
     title: 'Enseñar sin domesticar',
     description:
-      'Otra escuela es posible: aprendizaje liberador frente a la reproducción del orden.',
+      'Otra escuela es posible: aprendizaje liberador, curioso y lleno de preguntas.',
     author: 'Escuela Bionikas',
     date: '08 feb 2026',
     duration: '27 min',
-    art: ['#f7a8c4', '#9a6ef0'],
+    art: ['#ffb703', '#ff7a55'],
     glyph: '✦',
+    ride: 'Montaña de ideas',
   },
   {
     id: 'archivo',
@@ -90,8 +97,54 @@ export const modules: readonly Module[] = [
     author: 'Colectivo Bionikas',
     date: '30 ene 2026',
     duration: '15 min',
-    art: ['#db3f7c', '#7c4dff'],
+    art: ['#f0348b', '#7c4dff'],
     glyph: '❃',
+    ride: 'Galería del tiempo',
+  },
+] as const;
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  art: readonly [string, string];
+  initials: string;
+  /** Emoji o glifo con el que se identifica la persona. */
+  mark: string;
+}
+
+export const team: readonly TeamMember[] = [
+  {
+    name: 'Amara Solano',
+    role: 'Dirección pedagógica',
+    bio: 'Diseña los recorridos de aprendizaje y cuida que cada módulo se pueda disfrutar sin prisa.',
+    art: ['#ff5fa8', '#ffb703'],
+    initials: 'AS',
+    mark: '✿',
+  },
+  {
+    name: 'Nadia Quispe',
+    role: 'Investigación y archivo',
+    bio: 'Rastrea textos, memorias y consignas para que el archivo vivo siga creciendo.',
+    art: ['#7c4dff', '#2f9fe8'],
+    initials: 'NQ',
+    mark: '◈',
+  },
+  {
+    name: 'Tomas Ferreira',
+    role: 'Comunidad y cuidados',
+    bio: 'Teje las redes de apoyo mutuo y sostiene los espacios de escucha del colectivo.',
+    art: ['#10b981', '#6ee7b7'],
+    initials: 'TF',
+    mark: '❋',
+  },
+  {
+    name: 'Lía Mendoza',
+    role: 'Audiovisual',
+    bio: 'Convierte cada módulo en una historia que se ve, se escucha y se recuerda.',
+    art: ['#ff7a55', '#f0348b'],
+    initials: 'LM',
+    mark: '▶',
   },
 ] as const;
 
@@ -99,7 +152,8 @@ export const filters = ['Todos', 'Teoría', 'Comunidad', 'Ecología', 'Intersecc
 export type Filter = (typeof filters)[number];
 
 export const navLinks = [
-  { href: '#carrusel', label: 'Carrusel 3D' },
+  { href: '#carrusel', label: 'Carrusel' },
+  { href: '#equipo', label: 'Equipo' },
   { href: '#recursos', label: 'Recursos' },
   { href: '#comunidad', label: 'Comunidad' },
   { href: '#donar', label: 'Donar' },
@@ -109,4 +163,12 @@ export const heroPillars = [
   { href: '#carrusel', label: 'Módulos Audiovisuales', glyph: '▶' },
   { href: '#comunidad', label: 'Redes de Apoyo Mutuo', glyph: '❋' },
   { href: '#recursos', label: 'Perspectiva Decolonial', glyph: '◈' },
+] as const;
+
+/** Cifras del bloque de comunidad. */
+export const stats = [
+  { value: '3.400', label: 'Personas en red' },
+  { value: '128', label: 'Módulos abiertos' },
+  { value: '24', label: 'Colectivos aliados' },
+  { value: '0 €', label: 'Para acceder' },
 ] as const;

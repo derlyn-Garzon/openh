@@ -33,7 +33,7 @@ export function ModuleArt({ module, aspect = 'wide', compact = false }: ModuleAr
           aria-label={`Reproducir ${module.title}`}
           className="absolute inset-0 grid place-items-center transition-transform duration-200 hover:scale-105"
         >
-          <span className="grid h-14 w-14 place-items-center rounded-pill bg-white/90 text-lg text-violet-600 shadow-lift">
+          <span className="grid h-14 w-14 place-items-center rounded-pill bg-white/90 text-lg text-grape-600 shadow-lift">
             ▶
           </span>
         </button>
@@ -74,7 +74,7 @@ export function ModuleCard({ module, cta = 'Ver Módulo', className = '' }: Modu
         <span className="truncate text-xs text-muted">{module.author}</span>
         <a
           href={`#modulo-${module.id}`}
-          className="inline-flex shrink-0 items-center gap-1 rounded-pill px-3 py-1.5 text-xs font-semibold text-violet-600 transition-all duration-200 hover:bg-lilac-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600"
+          className="inline-flex shrink-0 items-center gap-1 rounded-pill px-3 py-1.5 text-xs font-semibold text-grape-600 transition-all duration-200 hover:bg-grape-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape-600"
         >
           {cta}
           <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
